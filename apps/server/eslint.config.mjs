@@ -45,7 +45,7 @@ export default tseslint.config(
           groups: [
             'builtin', // Node.js built-in modules
             'external', // npm packages
-            'internal', // Internal modules (using paths defined in pathGroups)
+            'internal', // Internal modules (controllers, modules, dtos)
             'parent', // Parent directories
             'sibling', // Same directory
             'index', // Index files
@@ -60,6 +60,71 @@ export default tseslint.config(
               pattern: '@/**',
               group: 'internal',
               position: 'before',
+            },
+            // Controllers - first in internal group
+            {
+              pattern: '**/*.controller',
+              group: 'internal',
+              position: 'before',
+            },
+            {
+              pattern: './*.controller',
+              group: 'internal',
+              position: 'before',
+            },
+            // Modules - after controllers
+            {
+              pattern: '**/*.module',
+              group: 'internal',
+              position: 'before',
+            },
+            {
+              pattern: './*.module',
+              group: 'internal',
+              position: 'before',
+            },
+            // Services - after modules
+            {
+              pattern: '**/*.service',
+              group: 'internal',
+              position: 'before',
+            },
+            {
+              pattern: './*.service',
+              group: 'internal',
+              position: 'before',
+            },
+            // Schemas - before DTOs
+            {
+              pattern: '**/schema/**',
+              group: 'internal',
+              position: 'before',
+            },
+            {
+              pattern: '../**/schema',
+              group: 'internal',
+              position: 'before',
+            },
+            {
+              pattern: '**/database/schema',
+              group: 'internal',
+              position: 'before',
+            },
+            // DTOs - last in internal group
+            {
+              pattern: '**/dto/**',
+              group: 'internal',
+              position: 'after',
+            },
+            {
+              pattern: './dto/**',
+              group: 'internal',
+              position: 'after',
+            },
+            {
+              pattern: './dto',
+              group: 'internal',
+              position: 'after',
             },
           ],
           pathGroupsExcludedImportTypes: ['builtin'],
